@@ -19,3 +19,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Nunca versionar segredos, dados pessoais, documentos de pessoas ou resultados de consultas reais. Fixtures sintéticas vivem somente em `tests/`; não importar o servidor de fixtures na aplicação.
 - Respeitar a ordem/campos confirmados no PDF. Não tratar assinatura/upload como autorização de imagem. Não armazenar arquivos pessoais em `public`, cache persistente do navegador ou URL aberta.
 - Atualizar a auditoria com evidências e pendências em cada entrega; não declarar 100% de conformidade ou prontidão sem verificar cada critério. Executar os checks adequados do README e manter CI. Testes com fixtures não substituem homologação real.
+
+- Login é permitido exclusivamente a membros institucionais de `Serviço social` e/ou `Tecnologia`, nomes físicos confirmados. Aplicar a lista fixa no login e na revalidação de sessão; configuração de módulos não pode autorizar outras equipes. Seguir `docs/politica-acesso.md`; manter dados sociais sob permissões separadas e diagnóstico exclusivo de Tecnologia.

@@ -244,3 +244,32 @@ test("menu móvel mantém foco e fecha por Escape", async ({
     page.getByRole("button", { name: "Expandir menu" }),
   ).toBeVisible();
 });
+
+test("sessão recusada na próxima consulta encerra o acesso ao painel", async ({
+  page,
+  context,
+}) => {
+  await context.addCookies([
+    {
+      name: "ac_social_ss",
+      value: "fixture-social",
+      url: "http://localhost:3000",
+    },
+  ]);
+  await page.goto("/cadastros");
+  await expect(
+    page.getByRole("heading", { name: "Nenhum cadastro encontrado" }),
+  ).toBeVisible();
+  await page.route("**/api/v1/servico-social/cadastros**", (route) =>
+    route.fulfill({ status: 401, json: { detail: "Sessão recusada" } }),
+  );
+  await page.getByLabel("Buscar por nome ou ID institucional").fill("Teste");
+  await page.getByRole("button", { name: "Buscar", exact: true }).click();
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(
+    page.getByRole("heading", { name: "Entrar na plataforma" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Nenhum cadastro encontrado" }),
+  ).toHaveCount(0);
+});

@@ -7,6 +7,8 @@ from uuid import UUID
 from pydantic import AliasChoices, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from app.domain.access import LOGIN_TEAMS
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -38,6 +40,13 @@ class Settings(BaseSettings):
     @classmethod
     def blank_scope(cls, value):
         return value or None
+
+    @field_validator("social_access_policy")
+    @classmethod
+    def policy_cannot_expand_login_teams(cls, value):
+        if set(value) - LOGIN_TEAMS:
+            raise ValueError("A política admite somente as equipes Serviço social e Tecnologia.")
+        return value
 
     @model_validator(mode="after")
     def validate_origin(self):

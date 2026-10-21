@@ -6,7 +6,7 @@ from uuid import UUID
 
 from app.application.errors import ApplicationError
 from app.application.ports import AuthRepository, AuthWork
-from app.domain.access import Actor, resolve_permissions
+from app.domain.access import Actor, can_login, resolve_permissions
 
 COOKIE_NAME = "ac_social_ss"
 
@@ -36,9 +36,9 @@ class AuthService:
         if not self.clinic_id:
             raise ApplicationError(503, "Integração institucional indisponível.")
         teams = work.teams(professional["id"])
-        permissions = resolve_permissions(teams, self.policy, self.approved)
-        if not permissions and "Tecnologia" not in teams:
+        if not can_login(teams):
             raise ApplicationError(403, "Acesso não autorizado para este serviço.")
+        permissions = resolve_permissions(teams, self.policy, self.approved)
         return Actor(
             id=professional["id"],
             name=professional["display_name"],
@@ -104,7 +104,13 @@ class AuthService:
             professional = work.find_professional(professional_id) if professional_id else None
             if not professional:
                 raise ApplicationError(401, "Sua sessão expirou. Entre novamente.")
-            return self.actor_from(work, professional)
+            try:
+                return self.actor_from(work, professional)
+            except ApplicationError as error:
+                if error.status_code == 403:
+                    # A former member no longer has a valid application session.
+                    raise ApplicationError(401, "Sua sessão expirou. Entre novamente.") from None
+                raise
 
     def logout(self, token: str | None):
         if token:

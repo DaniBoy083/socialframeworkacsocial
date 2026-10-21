@@ -24,9 +24,11 @@ O frontend segue na raiz existente para preservar o projeto Next.js; o backend t
 
 ## Autenticação e autorização
 
-E-mail e senha são os únicos campos de login. Equipes vêm da consulta pelo ID de `profissionais_cadastrados`, nunca de dados do cliente. O verificador implementa scrypt com parâmetros padrão do Node e comparação constante; a compatibilidade com a implementação original ainda requer o arquivo referenciado no contrato. O cliente confirma a sessão antes de redirecionar.
+E-mail e senha são os únicos campos de login. Equipes vêm da consulta pelo ID de `profissionais_cadastrados`, nunca de dados do cliente. O verificador implementa scrypt com parâmetros padrão do Node e comparação constante; foi conferido no código local do adaptador ABA e em vetor sintético independente, mantendo pendente a homologação das credenciais/destino. O cliente confirma a sessão antes de redirecionar.
 
 Sessão própria `ac_social_ss`: token aleatório de 32 bytes; somente SHA-256 no PostgreSQL; cookie HttpOnly, SameSite=Strict, Path=/ e Secure em produção; expiração de oito horas. Revalidação consulta o profissional e suas equipes a cada operação. Logout revoga o hash. Nenhuma senha é escrita no espelho, nas sessões ou nos logs.
+
+A lista fixa de login permite somente as equipes institucionais exatas `Serviço social` e `Tecnologia`, confirmadas no banco. Ambas podem autenticar sem permissões de módulos quando a infraestrutura estiver pronta. A configuração não autoriza equipes adicionais. Perder o último vínculo permitido faz a sessão retornar 401 na próxima operação; o frontend limpa consultas e volta ao login. Consulte a [política de acesso](politica-acesso.md).
 
 Tecnologia pode diagnosticar conexões; não ganha acesso social automaticamente. A política de leitura social está vazia e desligada por padrão; ativá-la exige matriz aprovada. Não há permissões de escrita disponíveis nesta etapa. Guards de página e API são independentes; rota técnica sem equipe retorna página 404 e endpoint 403.
 

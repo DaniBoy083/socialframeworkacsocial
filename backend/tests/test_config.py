@@ -20,3 +20,19 @@ def test_cookies_secure_and_policy_never_default_to_authorized():
     )
     assert settings.secure_cookies
     assert not settings.social_policy_approved and settings.social_access_policy == {}
+
+
+@pytest.mark.parametrize("team", ["Recepção", "Administração", "Equipe ABA", "Serviço Social"])
+def test_config_cannot_expand_the_login_allowlist(team):
+    with pytest.raises(ValidationError, match="somente as equipes"):
+        Settings(
+            _env_file=None,
+            social_policy_approved=True,
+            social_access_policy={team: ["registry:read"]},
+        )
+
+
+def test_config_accepts_only_confirmed_names_for_module_policy():
+    policy = {"Serviço social": ["registry:read"], "Tecnologia": []}
+    settings = Settings(_env_file=None, social_access_policy=policy)
+    assert settings.social_access_policy == policy

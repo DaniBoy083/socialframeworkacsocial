@@ -6,7 +6,7 @@ Base de desenvolvimento do ambiente interno do Serviço Social: Next.js 16.4.2, 
 
 Login institucional com layout baseado nas referências, shell responsivo, sidebar e Agenda Digital; backend de autenticação com scrypt, sessões opacas próprias, revalidação de equipes, limitação persistente de tentativas e proteção de origem; consulta institucional preparada, diagnóstico restrito a Tecnologia e componentes iniciais de cadastros/análises. A ausência de infraestrutura retorna indisponibilidade e não inventa registros.
 
-A sessão depende de escopo configurado e das tabelas próprias de autenticação. O repositório contém uma **proposta de migração não aplicada**. A equipe Tecnologia recebe diagnóstico; não recebe acesso implícito aos dados sociais. As demais equipes dependem da matriz institucional aprovada. Não há conta demonstrativa, bypass de login ou armazenamento de credenciais no navegador.
+A sessão depende de escopo configurado e das tabelas próprias de autenticação. O repositório contém uma **proposta de migração não aplicada**. A equipe Tecnologia recebe diagnóstico; não recebe acesso implícito aos dados sociais. O login é restrito às equipes institucionais exatas `Serviço social` e `Tecnologia`, com senha válida e vínculo atual. Nenhuma outra equipe pode ser liberada pela configuração. As permissões dos módulos são separadas e dependem de matriz aprovada; veja a [política de acesso](docs/politica-acesso.md). Não há conta demonstrativa, bypass de login ou armazenamento de credenciais no navegador.
 
 ## Ambiente local (PowerShell)
 
@@ -30,7 +30,7 @@ npm.cmd run dev
 
 Abra `http://localhost:3000`. O backend fica em `http://127.0.0.1:8000`. `GET /api/v1/health` verifica somente a vida do processo; não comprova prontidão do banco.
 
-Para autenticação real, confirmar primeiro `SOCIAL_CLINIC_ID`, estrutura do destino, implementação scrypt original e proposta de migração. Não gerar um escopo novo e não aplicar migrações ABA neste serviço. `APP_ORIGIN` deve coincidir no Next.js e no FastAPI. `SOCIAL_API_URL` é exclusiva do servidor. Produção exige `ENVIRONMENT=production`, HTTPS e infraestrutura revisada.
+Para autenticação real, confirmar primeiro `SOCIAL_CLINIC_ID`, estrutura do destino e proposta de migração; o verificador scrypt já foi conferido com o adaptador ABA, mas ainda exige homologação no destino. Não gerar um escopo novo e não aplicar migrações ABA neste serviço. `APP_ORIGIN` deve coincidir no Next.js e no FastAPI. `SOCIAL_API_URL` é exclusiva do servidor. Produção exige `ENVIRONMENT=production`, HTTPS e infraestrutura revisada.
 
 ## Verificação
 
@@ -53,6 +53,7 @@ Inspeção opcional **somente leitura**, sem imprimir credenciais, pessoas ou ha
 
 ```powershell
 backend/.venv/Scripts/python.exe backend/scripts/inspect_schema.py
+backend/.venv/Scripts/python.exe backend/scripts/check_access.py
 ```
 
 ## Documentação
@@ -60,6 +61,7 @@ backend/.venv/Scripts/python.exe backend/scripts/inspect_schema.py
 - [Planejamento recebido](docs/PLANEJAMENTO_SOCIAL_FRAMEWORK_AC_SOCIAL.md)
 - [Arquitetura](docs/arquitetura.md) e [decisões](docs/decisoes.md)
 - [Banco e contratos](docs/banco-contratos.md), [API](docs/api.md) e [modelo cadastral](docs/cadastro-modelo.md)
+- [Política de login e permissões](docs/politica-acesso.md)
 - [Matriz de tratamentos](docs/lgpd-matriz-tratamentos.md)
 - [Auditoria, evidências e pendências](docs/AUDITORIA_APLICACAO_E_PRINCIPIOS.md)
 - [Operação e evolução](docs/operacao.md)

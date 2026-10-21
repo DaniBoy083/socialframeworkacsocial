@@ -20,7 +20,7 @@ O contrato documental tratava o operador como identidade institucional; a inspe�
 
 A inspeção não certifica FKs, triggers, grants, ICU, isolamento de rede, backups, conteúdo do catálogo nem política de acesso. O diagnóstico da aplicação confere apenas presença das tabelas de integração; não substitui a certificação ACS-IDENTITY-1. A disponibilidade real de `ssframework` não foi consultada ou alterada; o documento recebido o declara planejado/indisponível.
 
-Os arquivos `005_shared_registry.sql`, `passwordHash.ts`, adaptadores ABA, evidências operacionais e guias arquiteturais citados no documento de integração não foram fornecidos neste workspace. Não copiar tabelas de sessões/comandos ABA nem criar uma segunda base de pessoas.
+Os arquivos `005_shared_registry.sql`, adaptadores ABA, evidências operacionais e guias arquiteturais citados no documento de integração não foram fornecidos neste workspace. Não copiar tabelas de sessões/comandos ABA nem criar uma segunda base de pessoas.
 
 ## Proposta de estruturas próprias
 
@@ -33,3 +33,10 @@ Sessões armazenam ID institucional do operador e hash do token, sem senha. Tent
 Busca com nome normalizado ou UUID, filtro obrigatório `clinic_id` confiável e paginação máxima de 50 (51 lidos para calcular `hasMore`). SQL parametrizado, curingas escapados e ordem por nome/ID. O contato institucional continua texto livre: nunca extrair telefone por heurística ou usar como chave de pessoa. A futura ficha terá telefone próprio normalizado.
 
 Escritas sociais exigem contrato físico próprio, FK composta `(id,clinic_id)`, ID raiz igual ao UUID institucional, versões separadas da identidade, idempotência por ator/conteúdo, transação única e proveniência mínima. Nenhuma dessas estruturas sociais foi criada por inferência.
+
+
+## Conferência de equipes e autenticação — 21/10/2026
+
+Consulta posterior em READ ONLY conferiu somente os nomes `Serviço social` e `Tecnologia`, sem membros, senhas ou dados de pessoas. São as duas equipes fixas de login autorizadas pelo responsável. O diagnóstico `backend/scripts/check_access.py` confirmou ambas presentes, escopo não configurado, política de módulos desativada e tabelas próprias de autenticação ausentes. Isso não habilita login real nem modifica permissões no banco.
+
+O arquivo scrypt do ABA foi consultado apenas para leitura em `../abaframeworkacsocial/src/modules/auth/application/passwordHash.ts`; a implementação foi conferida com o verificador Python e o vetor Node sintético. Não foi copiado hash/credencial nem foi criada dependência de runtime no projeto vizinho. A homologação operacional no destino permanece pendente.

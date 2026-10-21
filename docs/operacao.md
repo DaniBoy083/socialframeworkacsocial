@@ -5,8 +5,8 @@
 - Conferir origem, HTTPS, `ENVIRONMENT=production`, segredo PostgreSQL de privilégio mínimo e escopo institucional existente. Nunca usar outro clinic_id por aplicação.
 - Obter as migrações/implementações comuns referenciadas no contrato; conferir tipos, FKs, triggers, normalização ICU, grants e versão ACS-IDENTITY-1.
 - Revisar a proposta `001_social_auth.proposed.sql` com backup recuperável, histórico de migrações, retenção e plano de recuperação. Aplicação é uma operação separada, não executada por build/startup.
-- Homologar scrypt com fixtures da implementação institucional original; testar credenciais válidas/inválidas sem expor hashes, associação pelo ID, revogação de equipe, origem, limitação e logout em ambiente isolado.
-- Aprovar matriz de equipes/permissões específica do Serviço Social e implementar trilha durável de acesso antes de ativar leituras reais. Não dar acesso social a Tecnologia por padrão.
+- Manter o vetor scrypt Node/Python já verificado e homologar a integração com o destino; testar credenciais válidas/inválidas sem expor hashes, associação pelo ID, revogação de equipe, origem, limitação e logout em ambiente isolado.
+- Manter login fixo a `Serviço social`/`Tecnologia` e aprovar a matriz de permissões de operações específica do Serviço Social e implementar trilha durável de acesso antes de ativar leituras reais. Não dar acesso social a Tecnologia por padrão.
 - Confirmar provedor de frontend/API Python e rede entre ambos. Um build Next.js não provisiona FastAPI nem garante compatibilidade com Vercel. Não publicar fixture de teste.
 
 ## Próximas entregas
@@ -26,3 +26,5 @@ API local usa `--no-access-log`; também configurar proxy, frontend e observabil
 Expiração impede acesso mesmo antes da limpeza física de sessões. O job de limpeza de sessões/tentativas e sua política de retenção ainda não foram implementados. Não anunciar renovação automática ou revogação por troca de senha. Configurar proteção global de tentativas no proxy controlado, sem confiar em X-Forwarded-For arbitrário.
 
 Não existe deploy, alteração do catálogo `ssframework` ou migração automática nesta entrega. A auditoria deve ser atualizada a cada mudança com requisitos, comandos executados, resultados e limites reais.
+
+A lista de equipes elegíveis não é configurável: use exatamente os nomes confirmados. Para diagnóstico seguro, execute `backend/.venv/Scripts/python.exe backend/scripts/check_access.py`. Alterar a matriz de módulos não concede login a terceiros. Perda do último vínculo autorizado retorna 401 na próxima verificação; não anunciar exclusão física ou revogação permanente do token por esse mecanismo.

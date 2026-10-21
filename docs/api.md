@@ -5,8 +5,8 @@ Backend FastAPI em `/api/v1`; Next.js oferece BFF de mesma origem sob o mesmo pr
 | Método e rota | Autorização / resultado |
 |---|---|
 | GET `/health` | Público; `{status: "ok", service: "social-framework"}`; não revela banco/configuração |
-| POST `/auth/login` | Origem exata; `{email,password}` estrito; cria cookie próprio e retorna `{authenticated,actor}` |
-| GET `/auth/session` | Sessão válida, revalidação institucional; `{authenticated:true,actor}` |
+| POST `/auth/login` | Origem exata; `{email,password}` estrito; senha válida + vínculo atual exclusivamente com `Serviço social`/`Tecnologia`; cria cookie próprio e retorna `{authenticated,actor}` |
+| GET `/auth/session` | Sessão válida, revalidação institucional das duas equipes autorizadas; perda do último vínculo retorna 401; `{authenticated:true,actor}` |
 | POST `/auth/logout` | Origem exata; revoga sessão e remove cookie; idempotente sem cookie |
 | GET `/usuarios?busca=...&offset=0` | Sessão + `registry:read`; 3–200 caracteres normalizados, offset 0–100000; `{users,hasMore}` |
 | GET `/tecnologia/conexao` | Sessão + equipe atual exatamente `Tecnologia`; status e latência sanitizados |
@@ -15,7 +15,7 @@ Backend FastAPI em `/api/v1`; Next.js oferece BFF de mesma origem sob o mesmo pr
 
 `actor`: `id` (texto), `name`, `email`, `teams`, `permissions`, `isTechnology`. O cliente não pode escolher esses atributos. `users`: identidade administrativa mínima, sem prontuário, campos `id,name,birthDate,contact,version,createdAt`. Não usar esse endpoint como lista de cadastros sociais ou interpretar ausência de prontuário como ausência da pessoa.
 
-Todos os endpoints de dados exigem autorização no backend e não são públicos por conhecer um ID. Nenhuma permissão social é concedida até configurar explicitamente política aprovada. Consulta institucional está implementada, mas não homologada com registros reais.
+Todos os endpoints de dados exigem autorização no backend e não são públicos por conhecer um ID. Nenhuma permissão social é concedida até configurar explicitamente política aprovada. Essa política não concede login a outras equipes. Membros de Serviço Social e Tecnologia podem autenticar sem permissões de módulo, mas não consultar dados sem autorização específica. Consulta institucional está implementada, mas não homologada com registros reais.
 
 ## Erros e segurança
 

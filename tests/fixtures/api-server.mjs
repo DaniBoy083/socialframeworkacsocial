@@ -22,7 +22,7 @@ createServer((request, response) => {
         authenticated: true,
         actor: {
           ...clinicActor,
-          teams: [technology ? "Tecnologia" : "Equipe sintética"],
+          teams: [technology ? "Tecnologia" : "Serviço social"],
           isTechnology: technology,
           permissions: social ? ["registrations:read", "analytics:read"] : [],
         },

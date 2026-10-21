@@ -487,3 +487,7 @@ Lei nº 13.709/2018 (LGPD): https://www.planalto.gov.br/ccivil_03/_ato2015-2018/
 Guia da ANPD sobre segurança da informação: https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-orientativo-sobre-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte
 
 Ordem de trabalho ao agente: comece agora pelo levantamento técnico e bootstrap (Fases 0 e 1), configure as dependências, examine os materiais já enviados no Workspace, implemente as camadas e evolua até os critérios de aceite. Documente incompatibilidades reais; nunca improvise campos, tabelas, permissões ou conteúdo de consentimento não confirmados.
+
+## Adendo de autorização — 21/10/2026
+
+Por instrução posterior expressa do responsável, o login fica restrito a profissionais com senha institucional válida e vínculo atual com `Serviço social` ou `Tecnologia`, nomes físicos conferidos no banco. Esta definição substitui a pendência de quais equipes podem entrar; não aprova implicitamente a matriz de operações/dados. Nenhuma configuração pode ampliar as equipes de login. Revalidar a associação em toda operação; diagnóstico exclusivo de Tecnologia. Política e limites atuais em `politica-acesso.md` e na auditoria.

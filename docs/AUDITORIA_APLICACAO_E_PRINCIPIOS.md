@@ -1,6 +1,6 @@
 # Auditoria da aplicação e dos princípios
 
-Data: **21/10/2026**, America/Sao_Paulo. Escopo: primeira entrega de desenvolvimento, a partir do bootstrap Next.js existente. **Não há evidência para afirmar 100% de conformidade, conclusão do MVP ou prontidão para produção.** As restrições abaixo são parte do resultado, não uma homologação implícita.
+Data: **21/10/2026**, America/Sao_Paulo. Escopo: base de desenvolvimento e revisões de marca/autorização, a partir do bootstrap Next.js existente. **Não há evidência para afirmar 100% de conformidade, conclusão do MVP ou prontidão para produção.** As restrições abaixo são parte do resultado, não uma homologação implícita.
 
 ## Materiais examinados
 
@@ -10,9 +10,9 @@ Data: **21/10/2026**, America/Sao_Paulo. Escopo: primeira entrega de desenvolvim
 - Imagens do prompt: composição do login e painel/sidebar ABA. Nomes adaptados para Social Framework, com identidade visual posteriormente ajustada aos SVGs já utilizados no ecossistema.
 - [Agenda Digital](https://agenda-digital-ac-social.vercel.app), consultada por HTTP em 21/10/2026, resposta 200: login institucional e identificação do rodapé. A consulta não foi uma homologação autenticada da Agenda.
 - Guias locais da versão instalada do Next.js para páginas/layouts, componentes servidor/cliente, route handlers e autenticação; bloco obrigatório do AGENTS preservado.
-- Inventário READ ONLY de colunas do banco configurado: [banco e contratos](banco-contratos.md). Não houve leitura de pessoas/senhas, criação de sessões reais, DDL/DML institucional ou deploy.
+- Inventário READ ONLY de colunas do banco configurado: [banco e contratos](banco-contratos.md). Não houve leitura de pessoas/senhas, criação de sessões reais, DDL/DML institucional ou deploy. A revisão de autorização acrescentou somente consulta dos nomes das duas equipes e presença das tabelas próprias de sessão.
 
-Arquivos externos referenciados e ausentes: migração 005 comum, implementação `passwordHash.ts`, adaptadores ABA, guias de arquitetura unificada, documentos de operação/evidências de outro serviço. Suas afirmações documentais não foram tratadas como verificação deste destino.
+Arquivos externos referenciados e ausentes: migração 005 comum, adaptadores ABA, guias de arquitetura unificada, documentos de operação/evidências de outro serviço. Suas afirmações documentais não foram tratadas como verificação deste destino. Na revisão de autorização, o verificador `passwordHash.ts` foi consultado no projeto ABA vizinho e comparado à implementação Python; a homologação operacional continua separada.
 
 ## Princípios e evidência
 
@@ -33,7 +33,7 @@ Legenda: **implementado** descreve código entregue; **verificado** tem evidênc
 | Requisito | Estado | Evidência / próxima condição |
 |---|---|---|
 | Next.js/TypeScript + FastAPI, dependências, README e ambiente | Implementado e verificado | Build, checks e dependências instaladas; lockfiles versionados |
-| Login institucional funcional e perfis conferidos no banco | Parcial | Serviço, adaptador e testes prontos; faltam escopo confirmado, migração própria, arquivo original scrypt, matriz e login real homologado |
+| Login institucional funcional e perfis conferidos no banco | Parcial | Lista fixa Serviço social/Tecnologia, adaptador e scrypt conferidos/testados; faltam escopo, migração própria e homologação de login real. Permissões de módulos têm matriz separada |
 | Sidebar responsiva, Cadastros, Análises, Agenda e Tecnologia | Implementado e verificado com fixtures | Visibilidade por permissão; Tecnologia sem poderes sociais implícitos |
 | Equipe alheia não acessa a área técnica | Implementado e verificado | Guard servidor da página; API 403; headers adulterados sem efeito |
 | Lista vazia sem tabela e com Novo cadastro | Implementado e verificado com fixtures | Resposta real de cadastros permanece 503; não representar falha como zero registros |
@@ -65,11 +65,11 @@ Legenda: **implementado** descreve código entregue; **verificado** tem evidênc
 | `npm.cmd run format:check` | Aprovado |
 | `npm.cmd run build` | Aprovado, rotas autenticadas dinâmicas |
 | Ruff check/format | Aprovado |
-| `npm.cmd run test:backend` | **30 testes aprovados**, sem acesso ao banco real |
-| `npm.cmd test` | **19 testes aprovados**, 1 ignorado intencionalmente: teste exclusivo de menu móvel no projeto desktop |
+| `npm.cmd run test:backend` | **69 testes aprovados**, sem acesso ao banco real |
+| Playwright, suíte completa | **21 testes aprovados**, 1 ignorado intencionalmente: teste exclusivo de menu móvel no projeto desktop |
 | Axe WCAG A/AA nas telas/cenários testados | Nenhuma violação automática reportada; não equivale a certificação completa |
 | Smoke FastAPI real, sem consultar dados | Health 200; sessão sem cookie 401; login sem escopo 503 |
-| scrypt Python × Node 22 | Vetor sintético independente aprovado, preservando espaços/acentos da senha; arquivo institucional original ainda ausente |
+| scrypt Python × Node 22 | Vetor sintético independente aprovado, preservando espaços/acentos da senha; parâmetros conferidos por leitura no adaptador ABA local; credenciais/destino ainda não homologados |
 | `pip check` | Nenhuma incompatibilidade reportada |
 | `npm audit --omit=dev` | Nenhuma vulnerabilidade de produção reportada na data da consulta |
 | `npm audit` completo | **5 ocorrências altas pendentes** na cadeia ESLint/fast-glob/micromatch/braces; sem correção compatível publicada na consulta |
@@ -81,7 +81,7 @@ Aviso de ferramenta observado: Starlette sinaliza futura troca de `httpx` por `h
 
 ## Gates para avançar com dados reais
 
-1. Confirmar escopo e política social; obter os arquivos comuns faltantes e verificar invariantes/grants do destino. Não habilitar `ssframework` antecipadamente.
+1. Configurar o escopo confirmado e homologar a matriz de operações sociais, preservando login exclusivo às duas equipes autorizadas; obter os arquivos comuns faltantes e verificar invariantes/grants do destino. Não habilitar `ssframework` antecipadamente.
 2. Homologar autenticação original e revisar/aplicar apenas a migração própria autorizada com backup. Implementar limpeza/retenção e auditoria durável antes de habilitar leituras reais.
 3. Aprovar regras cadastrais ausentes no PDF e modelo físico social; implementar transações, idempotência, CAS e isolamento por recurso.
 4. Validar termo, finalidades, representação/menores, decisões de imagem, retenção e procedimentos de papel; definir storage privado, antimalware/quarentena e recuperação.
@@ -95,3 +95,21 @@ A aplicação respeita os limites conhecidos desta fase ao bloquear operações 
 Por solicitação do responsável, o logo raster extraído do PDF foi substituído pelo SVG em degradê já presente no AC Inteligence. A variante sólida existente no Portal AC Social também está disponível em `public/brand/ac-social-solid.svg`. O login e o ícone da aplicação usam `public/brand/ac-social.svg`; não há novo desenho ou imagem raster embutida no SVG. Foram removidos o PNG anterior e o favicon de exemplo do Next.js, além do recorte por CSS. As fontes foram consultadas apenas para leitura, sem alterações nos outros projetos.
 
 Validação desta revisão: os dois SVGs são XML válido e idênticos aos modelos de origem; lint, TypeScript e build aprovados; os dois cenários existentes de login desktop/mobile passaram com Axe, e as capturas finais foram revisadas visualmente. O servidor local existente foi preservado.
+
+
+## Revisão de autorização — 21/10/2026
+
+**Solicitação atendida no código:** login exclusivamente para profissionais das equipes institucionais exatas `Serviço social` ou `Tecnologia`, com senha válida e vínculo atual. A implementação anterior dependia de existir alguma permissão configurada ou pertencer a Tecnologia; isso deixava Serviço Social sem elegibilidade própria e permitia autorizar uma terceira equipe pela configuração. Essa condição foi substituída por uma lista fixa no domínio, independente de permissões de módulo.
+
+- Os nomes físicos das duas equipes foram confirmados em READ ONLY; nenhuma lista de membros, senha ou dado cadastral foi consultado.
+- Login e revalidação de sessão aplicam a mesma regra. Uma equipe alheia, cargo, e-mail, `tools_json`, header ou campo adulterado não autoriza a entrada.
+- Configuração com chave de terceira equipe é rejeitada; permissões de equipes não autorizadas também são ignoradas no domínio, inclusive em contas com múltiplas associações.
+- Ambas as equipes elegíveis podem autenticar sem permissões de leitura quando a infraestrutura estiver pronta. Isso não libera dados sociais: a matriz de módulos continua desativada por padrão. Diagnóstico permanece exclusivo de Tecnologia.
+- Perder o último vínculo autorizado retorna 401 na próxima requisição, e o cliente limpa consultas em memória e volta ao login; falta de permissão de uma operação continua 403. O token não é apagado automaticamente por essa revalidação, portanto não se anuncia revogação permanente.
+- A implementação scrypt foi conferida no código local ABA e no vetor independente Node/Python, sem copiar credenciais ou criar dependência de runtime do projeto vizinho.
+
+**Verificação da revisão:** 69 testes de backend aprovados, incluindo HTTP com o serviço de autenticação real e repositório sintético; 21 testes de interface aprovados e 1 ignorado intencionalmente por ser exclusivo do mobile. Build, lint, TypeScript, Prettier, Ruff e `pip check` aprovados. A interface foi exercitada em instância isolada do build de produção na porta 3100, com fixture na 18001, preservando a instância local do usuário. O novo cenário verifica retorno ao login após recusa da sessão.
+
+**Estado real do destino, conferido:** equipes presentes; `SOCIAL_CLINIC_ID` não configurado; `ss_sessions`/`ss_login_attempts` ausentes; política de módulos desativada. Nenhuma migração, habilitação de serviço ou alteração de membros foi realizada. Assim, a política solicitada está implementada e verificada em testes, mas não se afirma que o login institucional real já esteja operacional.
+
+**Limite da conformidade global:** a revisão não torna o MVP completo. Persistência cadastral, PDF, documentos, análises, auditoria durável, retenção e homologação operacional continuam pendentes na matriz. A auditoria npm foi repetida: nenhuma vulnerabilidade de produção reportada e cinco ocorrências altas na cadeia de desenvolvimento, com a mesma sugestão incompatível de downgrade do ESLint. Não há evidência para declarar 100% de conformidade da aplicação inteira. Política mantida em [politica-acesso.md](politica-acesso.md).

@@ -1,7 +1,7 @@
 # Registro de decisões — 21/10/2026
 
 1. **Preservar o Next.js na raiz** e adicionar `backend/`; evita duplicar o bootstrap. Stack exigida instalada, tema MUI e providers SSR compatíveis com Next 16.
-2. **Negar por padrão.** A documentação não define equipe/papel social. `SOCIAL_ACCESS_POLICY={}` e `SOCIAL_POLICY_APPROVED=false`; Tecnologia apenas diagnostica. Não copiar a política de equipes ABA.
+2. **Negar por padrão.** A instrução do responsável definiu login somente para `Serviço social` e `Tecnologia`, nomes físicos conferidos. Lista fixa no domínio e revalidação obrigatória; configuração não inclui terceiros. `SOCIAL_ACCESS_POLICY={}` e `SOCIAL_POLICY_APPROVED=false` continuam bloqueando dados sociais implícitos. A matriz de operações ainda depende de homologação; não copiar a política de equipes ABA.
 3. **Não migrar o banco compartilhado.** Apenas inventário de colunas em READ ONLY. Tabelas próprias de autenticação em proposta revisável, sem execução ou grants. Os arquivos comuns referenciados estão ausentes.
 4. **Respeitar tipos reais.** Profissional e equipe têm ID `text`; pessoa/escopo usam UUID. Nenhuma conversão ou nova identidade implícita.
 5. **Sessão opaca exclusiva**, oito horas, sem copiar hash da senha e sem cookies ABA. Perda de equipe recusa a sessão na próxima consulta; troca de senha não é anunciada como revogação automática.
@@ -12,3 +12,5 @@
 10. **Ação principal acessível `#d90f30`**, variação próxima do vermelho `#ef1636` para contraste de texto normal branco; demais tokens mantêm vinho/rosa/branco. Axe e revisão visual validam as superfícies implementadas, sem certificar o produto inteiro.
 11. **Sem câmera nesta fase**: Permissions-Policy bloqueia câmera/microfone/geolocalização enquanto não há fluxo autorizado. Rever o header de câmera no mesmo change que implementar a captura; não desbloquear permissões indiscriminadamente.
 12. **Dependências sem downgrade forçado.** A auditoria npm de produção não apontou vulnerabilidades na consulta de 21/10/2026. A auditoria completa apontou cinco ocorrências altas na cadeia de desenvolvimento ESLint/fast-glob/micromatch/braces. O reparo automático sugeriu downgrade incompatível do eslint-config-next 16 para 14; não aplicado. Monitorar correção upstream e manter os padrões de glob sob controle do repositório.
+
+13. **Elegibilidade independente de permissões de módulo.** Serviço Social pode autenticar sem permissão de leitura; Tecnologia não recebe poderes sociais automaticamente. Outras equipes são recusadas mesmo com política adulterada. Sessão sem vínculo atual autorizado retorna 401 para ativar o descarte do cache do cliente; operação sem permissão mantém 403. Detalhes em `politica-acesso.md`.

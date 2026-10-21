@@ -4,7 +4,7 @@ Este registro técnico identifica tratamentos previstos no planejamento/PDF. Nã
 
 | Grupo | Finalidade prevista | Dados / atenção | Controle atual | Definições pendentes |
 |---|---|---|---|---|
-| Autenticação | Identificar profissional e autorizar operações | E-mail, ID, equipes; senha apenas para verificação do hash original | Sessão própria, origem, expiração, hash do token, erros sanitizados | Homologar verificador e migração; retenção de sessões/tentativas; rate limit global |
+| Autenticação | Identificar profissional e autorizar operações | E-mail, ID, equipes; senha apenas para verificação do hash original | Login fixo Serviço social/Tecnologia, revalidação de equipe, sessão própria, origem, expiração, hash do token, erros sanitizados | Homologar credenciais/destino e migração (compatibilidade scrypt conferida no código ABA); retenção de sessões/tentativas; rate limit global |
 | Identidade da pessoa | Localizar pessoa sem duplicar UUID | Nome, nascimento, contato livre, escopo | Consulta preparada com escopo/paginação; política desligada | Matriz de leitura e auditoria durável de acessos |
 | Identificação social | Atendimento cadastral | CPF, NIS, filiação, etnia, escolaridade; etnia requer tratamento especialmente restrito | Não coletado nesta etapa | Necessidade por campo, base legal, acesso, obrigatoriedade, prazo |
 | Contato e endereço | Contato institucional | Endereço, CEP, telefone, moradia | Não coletado; normalizador de WhatsApp aceita apenas telefone explícito | Fonte de telefone social, uso autorizado, correção e retenção |
