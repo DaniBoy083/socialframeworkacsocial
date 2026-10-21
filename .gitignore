@@ -31,8 +31,16 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env
-.env.local
+.env*
+!.env.example
+!.env.exemple
+**/.venv/
+**/__pycache__/
+.pytest_cache/
+backend/.pytest_cache/
+/tmp/
+/output/
+/.playwright/
 
 # vercel
 .vercel
@@ -40,3 +48,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/test-results/
+/playwright-report/
+.ruff_cache/

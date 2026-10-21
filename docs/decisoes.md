@@ -1,0 +1,14 @@
+# Registro de decisões — 21/10/2026
+
+1. **Preservar o Next.js na raiz** e adicionar `backend/`; evita duplicar o bootstrap. Stack exigida instalada, tema MUI e providers SSR compatíveis com Next 16.
+2. **Negar por padrão.** A documentação não define equipe/papel social. `SOCIAL_ACCESS_POLICY={}` e `SOCIAL_POLICY_APPROVED=false`; Tecnologia apenas diagnostica. Não copiar a política de equipes ABA.
+3. **Não migrar o banco compartilhado.** Apenas inventário de colunas em READ ONLY. Tabelas próprias de autenticação em proposta revisável, sem execução ou grants. Os arquivos comuns referenciados estão ausentes.
+4. **Respeitar tipos reais.** Profissional e equipe têm ID `text`; pessoa/escopo usam UUID. Nenhuma conversão ou nova identidade implícita.
+5. **Sessão opaca exclusiva**, oito horas, sem copiar hash da senha e sem cookies ABA. Perda de equipe recusa a sessão na próxima consulta; troca de senha não é anunciada como revogação automática.
+6. **API de mesma origem via BFF**, destino server-side, lista de rotas, corpo limitado e dupla validação de origem. Sem segredos `NEXT_PUBLIC_*`.
+7. **Preservar o PDF e suas ambiguidades.** Inventariar campos sem inventar validação de negócio. O termo combinado exige revisão; presença do arquivo não determina autorização de imagem.
+8. **Módulos pendentes retornam 503**, não listas vazias ou métricas sintéticas. O botão Novo cadastro explica o estágio; persistência/PDF/documentos permanecem pendentes.
+9. **Logo original do PDF**, com transparência preservada. Referências do prompt orientam composição; os nomes ABA/Agenda são adaptados ao Serviço Social. Rodapé único `#8f0d23`, conforme branding, e fundo claro no painel.
+10. **Ação principal acessível `#d90f30`**, variação próxima do vermelho `#ef1636` para contraste de texto normal branco; demais tokens mantêm vinho/rosa/branco. Axe e revisão visual validam as superfícies implementadas, sem certificar o produto inteiro.
+11. **Sem câmera nesta fase**: Permissions-Policy bloqueia câmera/microfone/geolocalização enquanto não há fluxo autorizado. Rever o header de câmera no mesmo change que implementar a captura; não desbloquear permissões indiscriminadamente.
+12. **Dependências sem downgrade forçado.** A auditoria npm de produção não apontou vulnerabilidades na consulta de 21/10/2026. A auditoria completa apontou cinco ocorrências altas na cadeia de desenvolvimento ESLint/fast-glob/micromatch/braces. O reparo automático sugeriu downgrade incompatível do eslint-config-next 16 para 14; não aplicado. Monitorar correção upstream e manter os padrões de glob sob controle do repositório.

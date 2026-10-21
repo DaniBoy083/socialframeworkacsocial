@@ -1,0 +1,9 @@
+node_modules
+.next
+backend/.venv
+package-lock.json
+public
+*.pdf
+.env*
+tmp
+output
