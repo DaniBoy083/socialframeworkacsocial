@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   },
   description: "Ambiente institucional do Serviço Social da AC Social.",
   robots: { index: false, follow: false },
-  icons: { icon: "/brand/ac-social.png" },
+  icons: { icon: { url: "/brand/ac-social.svg", type: "image/svg+xml" } },
 };
 export default function RootLayout({
   children,

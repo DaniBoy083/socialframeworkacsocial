@@ -7,7 +7,7 @@ Data: **21/10/2026**, America/Sao_Paulo. Escopo: primeira entrega de desenvolvim
 - Planejamento `PLANEJAMENTO_SOCIAL_FRAMEWORK_AC_SOCIAL.md` recebido no workspace, preservado e incluído no versionamento.
 - Contrato `INTEGRACAO_SERVICOS_USUARIOS_PACIENTES_E_AUTENTICACAO.md` e `branding-guidelines.md`.
 - Duas páginas do PDF-modelo: texto extraído e renderização visual; campos e ambiguidades em [cadastro-modelo](cadastro-modelo.md).
-- Imagens do prompt: composição do login e painel/sidebar ABA. Nomes adaptados para Social Framework, com logo oficial extraído do modelo.
+- Imagens do prompt: composição do login e painel/sidebar ABA. Nomes adaptados para Social Framework, com identidade visual posteriormente ajustada aos SVGs já utilizados no ecossistema.
 - [Agenda Digital](https://agenda-digital-ac-social.vercel.app), consultada por HTTP em 21/10/2026, resposta 200: login institucional e identificação do rodapé. A consulta não foi uma homologação autenticada da Agenda.
 - Guias locais da versão instalada do Next.js para páginas/layouts, componentes servidor/cliente, route handlers e autenticação; bloco obrigatório do AGENTS preservado.
 - Inventário READ ONLY de colunas do banco configurado: [banco e contratos](banco-contratos.md). Não houve leitura de pessoas/senhas, criação de sessões reais, DDL/DML institucional ou deploy.
@@ -88,3 +88,10 @@ Aviso de ferramenta observado: Starlette sinaliza futura troca de `httpx` por `h
 5. Concluir PDF/documentos/análises e respectivos testes de segurança, fidelidade visual e integração antes do deploy.
 
 A aplicação respeita os limites conhecidos desta fase ao bloquear operações não confirmadas. Isso **não substitui implementar e homologar os critérios pendentes**.
+
+
+## Revisão da marca — 21/10/2026
+
+Por solicitação do responsável, o logo raster extraído do PDF foi substituído pelo SVG em degradê já presente no AC Inteligence. A variante sólida existente no Portal AC Social também está disponível em `public/brand/ac-social-solid.svg`. O login e o ícone da aplicação usam `public/brand/ac-social.svg`; não há novo desenho ou imagem raster embutida no SVG. Foram removidos o PNG anterior e o favicon de exemplo do Next.js, além do recorte por CSS. As fontes foram consultadas apenas para leitura, sem alterações nos outros projetos.
+
+Validação desta revisão: os dois SVGs são XML válido e idênticos aos modelos de origem; lint, TypeScript e build aprovados; os dois cenários existentes de login desktop/mobile passaram com Axe, e as capturas finais foram revisadas visualmente. O servidor local existente foi preservado.

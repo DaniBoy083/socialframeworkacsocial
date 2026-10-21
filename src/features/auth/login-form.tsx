@@ -53,17 +53,15 @@ export function LoginForm({ unavailable = false }: { unavailable?: boolean }) {
         Acesso institucional | Social Framework
       </p>
       <section className="login-card" aria-labelledby="login-title">
-        <div className="brand-logo">
-          <Image
-            className="brand-source"
-            src="/brand/ac-social.png"
-            alt="AC Social"
-            width={208}
-            height={208}
-            priority
-            unoptimized
-          />
-        </div>
+        <Image
+          className="brand-logo"
+          src="/brand/ac-social.svg"
+          alt="AC Social"
+          width={80}
+          height={80}
+          priority
+          unoptimized
+        />
         <h1 id="login-title">Entrar na plataforma</h1>
         <p className="login-description">
           Use seu e-mail institucional e sua senha para continuar.

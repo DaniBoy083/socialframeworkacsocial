@@ -1,6 +1,6 @@
 # Inventário do PDF-modelo
 
-Fonte: `docs/models/Cadastro_AC_Social novo.pdf`, duas páginas, inspecionadas por extração de texto e renderização visual em 21/10/2026. Documento original preservado. O logo em `public/brand/ac-social.png` é o recurso original extraído desse PDF, com seu canal de transparência; não foi redesenhado. Não é uma cópia da imagem de pacientes ou do termo.
+Fonte: `docs/models/Cadastro_AC_Social novo.pdf`, duas páginas, inspecionadas por extração de texto e renderização visual em 21/10/2026. Documento original preservado. A identidade visual do login usa agora os SVGs existentes no AC Inteligence e Portal AC Social, conforme solicitação posterior; o recorte PNG do modelo foi removido da aplicação.
 
 ## Ordem e rótulos observados
 
